@@ -1,14 +1,52 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Ionic Redux Form
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+  <form [formGroup]="userForm" connect="myForm" (ngSubmit)="onFormSubmitted()">
+
+    <div>
+      <label>
+        <span>Name</span>
+        <input type="text" placeholder="Name" formControlName="name">
+
+        <p *ngIf="userForm.controls.name.errors">
+          This field is bad!
+        </p>
+      </label>
+    </div>
+
+    <div>
+      <label>
+        <span>Email</span>
+        <input type="email" placeholder="Email" formControlName="email">
+      </label>
+    </div>
+
+    <div formGroupName="address">
+
+      <div>
+        <label>
+          <span>Country</span>
+          <input type="text" placeholder="Country" formControlName="country">
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <span>City</span>
+          <input type="text" placeholder="City"  formControlName="city">
+        </label>
+      </div>
+
+    </div>
+
+    <input type="submit" [disabled]="userForm.invalid">
+
+  </form>
 </ion-content>
